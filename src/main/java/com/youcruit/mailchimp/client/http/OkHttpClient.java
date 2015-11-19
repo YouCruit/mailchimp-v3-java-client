@@ -3,7 +3,6 @@ package com.youcruit.mailchimp.client.http;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.net.URI;
-import java.nio.charset.Charset;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
@@ -27,10 +26,10 @@ import com.youcruit.mailchimp.client.objects.pojos.QueryParameters;
 import com.youcruit.mailchimp.client.serializers.RFC3339TypeAdapter;
 
 public class OkHttpClient implements HttpClient {
+    
+    private static final MediaType APPLICATION_JSON = MediaType.parse("application/json");
 
     private static final Logger LOGGER = Logger.getLogger(OkHttpClient.class);
-    private static final MediaType APPLICATION_JSON = MediaType.parse("application/json");
-    public static final Charset UTF8 = Charset.forName("UTF-8");
 
     private final com.squareup.okhttp.OkHttpClient client;
 

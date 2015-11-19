@@ -1,16 +1,11 @@
 package com.youcruit.mailchimp.client.objects.pojos.request.list;
 
 import java.util.Date;
-import java.util.List;
 
 import com.google.gson.annotations.SerializedName;
-import com.youcruit.mailchimp.client.objects.pojos.QueryParameters;
 
-public class ListsRequest implements QueryParameters {
+public class ListsRequest extends AbstractListRequest {
 
-    public List<String> fields;
-    @SerializedName("exclude_fields")
-    public List<String> excludedFields;
     public Integer count;
     public Integer offset;
     @SerializedName("before_date_created")
