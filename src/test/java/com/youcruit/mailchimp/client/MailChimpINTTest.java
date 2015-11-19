@@ -5,7 +5,9 @@ import java.util.Date;
 
 import org.junit.Test;
 
+import com.youcruit.mailchimp.client.objects.pojos.request.list.ListRequest;
 import com.youcruit.mailchimp.client.objects.pojos.request.list.ListsRequest;
+import com.youcruit.mailchimp.client.objects.pojos.response.list.ListResponse;
 import com.youcruit.mailchimp.client.objects.pojos.response.list.ListsResponse;
 
 
@@ -25,4 +27,11 @@ public class MailChimpINTTest extends HttpIT {
 	request.count = 1;
 	ListsResponse lists = new ListClient(client).getLists(request);
     }
+    
+    @Test
+    public void getList() throws IOException {
+	ListRequest request = null;
+	ListResponse list = new ListClient(client).getList("e2f8d645d4", request);
+    }
+    
 }
