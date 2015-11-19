@@ -6,6 +6,7 @@ import java.util.Map;
 
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
+import com.youcruit.mailchimp.client.objects.pojos.list.ListMemberStatus;
 import com.youcruit.mailchimp.client.serializers.RFC3339TypeAdapter;
 
 public class ListMemberResponse {
@@ -17,7 +18,7 @@ public class ListMemberResponse {
     public String uniqueEmailId;
     @SerializedName("email_type")
     public String emailType;
-    public String status;
+    public ListMemberStatus status;
     @SerializedName("merge_fields")
     public Map<String, String> mergeFields;
     public Map<String, String> interests;

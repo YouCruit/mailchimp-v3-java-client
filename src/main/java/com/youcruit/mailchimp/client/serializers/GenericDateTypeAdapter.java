@@ -48,10 +48,14 @@ public class GenericDateTypeAdapter extends TypeAdapter<Date> {
 	    return null;
 	} else {
 	    String stringValue = in.nextString();
-	    try {
-		return getDateFormat().parse(stringValue);
-	    } catch (ParseException e) {
-		throw new IOException(e);
+	    if (stringValue != null && !stringValue.isEmpty()) {
+		try {
+		    return getDateFormat().parse(stringValue);
+		} catch (ParseException e) {
+		    throw new IOException(e);
+		}
+	    } else {
+		return null;
 	    }
 	}
     }
