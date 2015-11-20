@@ -4,7 +4,7 @@ import java.util.Date;
 
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
-import com.youcruit.mailchimp.client.serializers.RFC3339TypeAdapter;
+import com.youcruit.mailchimp.client.serializers.DateTimeAdapter;
 
 public class ListMemberLastNoteResponse {
 
@@ -12,7 +12,7 @@ public class ListMemberLastNoteResponse {
     public Integer noteId;
     
     @SerializedName("created_at")
-    @JsonAdapter(RFC3339TypeAdapter.class)
+    @JsonAdapter(DateTimeAdapter.class)
     public Date created_at;
     
     @SerializedName("created_by")

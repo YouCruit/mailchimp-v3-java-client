@@ -7,7 +7,7 @@ import java.util.Map;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.youcruit.mailchimp.client.objects.pojos.list.ListMemberStatus;
-import com.youcruit.mailchimp.client.serializers.RFC3339TypeAdapter;
+import com.youcruit.mailchimp.client.serializers.DateTimeAdapter;
 
 public class ListMemberResponse {
 
@@ -26,17 +26,17 @@ public class ListMemberResponse {
     @SerializedName("ip_signup")
     public String ipSignup;
     @SerializedName("timestamp_signup")
-    @JsonAdapter(RFC3339TypeAdapter.class)
+    @JsonAdapter(DateTimeAdapter.class)
     public Date timestampSignup;
     @SerializedName("ip_opt")
     public String ipOpt;
     @SerializedName("timestamp_opt")
-    @JsonAdapter(RFC3339TypeAdapter.class)
+    @JsonAdapter(DateTimeAdapter.class)
     public Date timestampOpt;
     @SerializedName("member_rating")
     public Integer memberRating;
     @SerializedName("last_changed")
-    @JsonAdapter(RFC3339TypeAdapter.class)
+    @JsonAdapter(DateTimeAdapter.class)
     public Date lastChanged;
     public String language;
     public Boolean vip;
