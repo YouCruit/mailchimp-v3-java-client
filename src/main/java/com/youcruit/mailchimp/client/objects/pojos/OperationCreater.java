@@ -10,7 +10,7 @@ public abstract class OperationCreater<T> {
         this.responseClass = clazz;
     }
 
-    public Operation createOperation() {
+    public Operation<T> createOperation() {
 	return operationBuilder.createOperation(responseClass);
     }
 }

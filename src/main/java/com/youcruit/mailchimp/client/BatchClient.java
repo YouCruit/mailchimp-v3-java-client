@@ -20,8 +20,8 @@ public class BatchClient {
 	return call(operation);
     }
     
-    private <V> V call(OperationCreater operationCreater) throws IOException {
-	Operation createOperation = operationCreater.createOperation();
+    private <V> V call(OperationCreater<V> operationCreater) throws IOException {
+	Operation<V> createOperation = operationCreater.createOperation();
 	return httpClient.sync(createOperation);
     }
 }

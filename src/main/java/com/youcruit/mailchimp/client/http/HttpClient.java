@@ -13,7 +13,7 @@ public interface HttpClient {
     String USER_AGENT = "mailchimp-v3-java-client/" + VERSION;
     Charset UTF8 = Charset.forName("UTF-8");
 
-    <V> V sync(Operation operation) throws IOException;
+    <V> V sync(Operation<V> operation) throws IOException;
     
     <V> V sync(AbstractRequest requestBody, Method method, Class<V> responseClass, Map<String, String> queryParameters, String... pathSegments) throws IOException;
 
