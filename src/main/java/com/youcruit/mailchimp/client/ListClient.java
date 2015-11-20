@@ -38,9 +38,13 @@ public class ListClient {
     public ListMemberResponse getListMember(String id, String email, ListMemberRequest request) throws IOException {
 	return httpClient.sync(Method.GET, ListMemberResponse.class, httpClient.toQueryParameters(request), "lists", id, "members", new MD5TypeAdapter().toMD5LowerCase(email));
     }
-    
+
     public ListMemberResponse createListMember(String id, ListCreateMemberRequest request) throws IOException {
 	return httpClient.sync(request, Method.POST, ListMemberResponse.class, "lists", id, "members");
+    }
+
+    public void deleteListMember(String id, String email) throws IOException {
+	httpClient.sync(Method.DELETE, Void.class, "lists", id, "members", new MD5TypeAdapter().toMD5LowerCase(email));
     }
 
 }
