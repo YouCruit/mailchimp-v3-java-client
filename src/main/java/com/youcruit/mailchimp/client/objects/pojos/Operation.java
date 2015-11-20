@@ -1,22 +1,21 @@
 package com.youcruit.mailchimp.client.objects.pojos;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.youcruit.mailchimp.client.http.HttpClient.Method;
 import com.youcruit.mailchimp.client.objects.pojos.request.AbstractRequest;
-import com.youcruit.mailchimp.client.serializers.RFC3339TypeAdapter;
+import com.youcruit.mailchimp.client.serializers.ArrayStringAdapter;
+import com.youcruit.mailchimp.client.serializers.QueryParametersAdapter;
 
 public class Operation {
 
     public Method method;
+    @JsonAdapter(ArrayStringAdapter.class)
     public String[] path;
     public Map<String, String> params;
     public AbstractRequest body;
@@ -25,7 +24,7 @@ public class Operation {
     public Class<?> responseClass;
 
     public enum Path {
-	LISTS("lists"), MEMBERS("members");
+	LISTS("lists"), MEMBERS("members"), BATCHES("batches");
 
 	private String pathField;
 
@@ -83,7 +82,7 @@ public class Operation {
 	}
 
 	public OperationBuilder params(final QueryParameters params) {
-	    this.params = toQueryParameters(params);
+	    this.params = new QueryParametersAdapter().toQueryParameters(params);
 	    return this;
 	}
 
@@ -105,52 +104,5 @@ public class Operation {
 	public Operation createOperation() {
 	    return new Operation(method, params, body, operationId, responseClass, paths.toArray(new String[paths.size()]));
 	}
-
-	public Map<String, String> toQueryParameters(QueryParameters queryParameters) {
-	    Map<String, String> result;
-	    if (queryParameters != null) {
-		result = new HashMap<>();
-		for (Field field : queryParameters.getClass().getFields()) {
-		    String key = field.getName();
-		    Object value;
-		    try {
-			value = field.get(queryParameters);
-		    } catch (IllegalAccessException e) {
-			throw new RuntimeException(e.getMessage(), e);
-		    }
-		    if (value != null) {
-			SerializedName annotation = field.getAnnotation(SerializedName.class);
-			if (annotation != null) {
-			    key = annotation.value();
-			}
-			String valueString = value.toString();
-			if (value instanceof Collection<?>) {
-			    valueString = listToString(value);
-			} else if (value instanceof Date) {
-			    RFC3339TypeAdapter rfc3339TypeAdapter = new RFC3339TypeAdapter();
-			    valueString = rfc3339TypeAdapter.getDateFormat().format(value);
-			}
-			result.put(key, valueString);
-		    }
-		}
-	    } else {
-		result = Collections.emptyMap();
-	    }
-	    return result;
-	}
-
-	private String listToString(Object value) {
-	    String valueString;
-	    StringBuilder sb = new StringBuilder();
-	    for (Object o : (Collection<?>) value) {
-		if (sb.length() > 0) {
-		    sb.append(",");
-		}
-		sb.append(o.toString());
-	    }
-	    valueString = sb.toString();
-	    return valueString;
-	}
     }
-
 }

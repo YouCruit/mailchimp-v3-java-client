@@ -1,4 +1,4 @@
-package com.youcruit.mailchimp.client.objects.pojos.list.operation;
+package com.youcruit.mailchimp.client.objects.pojos.operation.list;
 
 import com.youcruit.mailchimp.client.http.HttpClient.Method;
 import com.youcruit.mailchimp.client.objects.pojos.Operation.OperationBuilder;
