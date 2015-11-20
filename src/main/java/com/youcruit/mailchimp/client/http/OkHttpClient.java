@@ -53,8 +53,8 @@ public class OkHttpClient implements HttpClient {
 
     @SuppressWarnings("unchecked")
     @Override
-    public <V> V sync(Operation operation) throws IOException {
-	return sync(operation.body, operation.method, ((Class<V>) operation.responseClass), operation.params, operation.path);
+    public <V> V sync(Operation<V> operation) throws IOException {
+	return sync(operation.body, operation.method, operation.responseClass, operation.params, operation.path);
     }
 
     @Override

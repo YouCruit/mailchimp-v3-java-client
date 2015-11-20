@@ -7,13 +7,13 @@ import com.youcruit.mailchimp.client.objects.pojos.OperationCreater;
 import com.youcruit.mailchimp.client.objects.pojos.request.AbstractRequest;
 import com.youcruit.mailchimp.client.objects.pojos.response.batch.BatchResponse;
 
-public class BatchOperation extends OperationCreater {
+public class BatchOperation extends OperationCreater<BatchResponse> {
 
     public BatchOperation(AbstractRequest request) {
+	super(BatchResponse.class);
 	operationBuilder = new OperationBuilder();
 	operationBuilder.method(Method.POST);
 	operationBuilder.path(Path.BATCHES);
 	operationBuilder.body(request);
-	operationBuilder.responseClass(BatchResponse.class);
     }
 }

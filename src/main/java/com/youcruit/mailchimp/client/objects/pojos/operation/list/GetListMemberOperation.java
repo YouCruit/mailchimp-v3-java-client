@@ -8,7 +8,7 @@ import com.youcruit.mailchimp.client.objects.pojos.QueryParameters;
 import com.youcruit.mailchimp.client.objects.pojos.response.list.ListMemberResponse;
 import com.youcruit.mailchimp.client.serializers.MD5TypeAdapter;
 
-public class GetListMemberOperation extends OperationCreater {
+public class GetListMemberOperation extends OperationCreater<ListMemberResponse> {
 
     public GetListMemberOperation(String listId, String email) {
 	this(listId, email, null);
@@ -19,6 +19,7 @@ public class GetListMemberOperation extends OperationCreater {
     }
 
     public GetListMemberOperation(String listId, String email, String operationId, QueryParameters queryParameters) {
+	super(ListMemberResponse.class);
 	operationBuilder = new OperationBuilder();
 	operationBuilder.method(Method.GET);
 	operationBuilder.operationId(operationId);
@@ -27,6 +28,5 @@ public class GetListMemberOperation extends OperationCreater {
 	operationBuilder.path(listId);
 	operationBuilder.path(Path.MEMBERS);
 	operationBuilder.path(new MD5TypeAdapter().toMD5LowerCase(email));
-	operationBuilder.responseClass(ListMemberResponse.class);
     }
 }

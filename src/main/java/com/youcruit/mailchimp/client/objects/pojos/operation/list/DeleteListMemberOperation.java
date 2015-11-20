@@ -6,13 +6,14 @@ import com.youcruit.mailchimp.client.objects.pojos.Operation.Path;
 import com.youcruit.mailchimp.client.objects.pojos.OperationCreater;
 import com.youcruit.mailchimp.client.serializers.MD5TypeAdapter;
 
-public class DeleteListMemberOperation extends OperationCreater {
+public class DeleteListMemberOperation extends OperationCreater<Void> {
 
     public DeleteListMemberOperation(String listId, String email) {
 	this(listId, email, null);
     }
 
     public DeleteListMemberOperation(String listId, String email, String operationId) {
+	super(Void.class);
 	operationBuilder = new OperationBuilder();
 	operationBuilder.method(Method.DELETE);
 	operationBuilder.operationId(operationId);
@@ -20,6 +21,5 @@ public class DeleteListMemberOperation extends OperationCreater {
 	operationBuilder.path(listId);
 	operationBuilder.path(Path.MEMBERS);
 	operationBuilder.path(new MD5TypeAdapter().toMD5LowerCase(email));
-	operationBuilder.responseClass(Void.class);
     }
 }

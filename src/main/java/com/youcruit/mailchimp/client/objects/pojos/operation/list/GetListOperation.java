@@ -7,7 +7,7 @@ import com.youcruit.mailchimp.client.objects.pojos.OperationCreater;
 import com.youcruit.mailchimp.client.objects.pojos.QueryParameters;
 import com.youcruit.mailchimp.client.objects.pojos.response.list.ListResponse;
 
-public class GetListOperation extends OperationCreater {
+public class GetListOperation extends OperationCreater<ListResponse> {
 
     public GetListOperation(String listId) {
 	this(listId, null);
@@ -18,13 +18,13 @@ public class GetListOperation extends OperationCreater {
     }
 
     public GetListOperation(String listId, String operationId, QueryParameters queryParameters) {
+	super(ListResponse.class);
 	operationBuilder = new OperationBuilder();
 	operationBuilder.method(Method.GET);
 	operationBuilder.operationId(operationId);
 	operationBuilder.params(queryParameters);
 	operationBuilder.path(Path.LISTS);
 	operationBuilder.path(listId);
-	operationBuilder.responseClass(ListResponse.class);
     }
 
 }

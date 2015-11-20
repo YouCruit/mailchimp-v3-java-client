@@ -7,19 +7,19 @@ import com.youcruit.mailchimp.client.objects.pojos.OperationCreater;
 import com.youcruit.mailchimp.client.objects.pojos.request.AbstractRequest;
 import com.youcruit.mailchimp.client.objects.pojos.response.list.ListResponse;
 
-public class CreateListOperation extends OperationCreater {
+public class CreateListOperation extends OperationCreater<ListResponse> {
 
     public CreateListOperation(AbstractRequest request) {
 	this(null, request);
     }
 
     public CreateListOperation(String operationId, AbstractRequest abstractRequest) {
+	    super(ListResponse.class);
 	operationBuilder = new OperationBuilder();
 	operationBuilder.method(Method.POST);
 	operationBuilder.operationId(operationId);
 	operationBuilder.path(Path.LISTS);
 	operationBuilder.body(abstractRequest);
-	operationBuilder.responseClass(ListResponse.class);
     }
 
 }

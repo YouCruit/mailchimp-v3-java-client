@@ -12,7 +12,7 @@ import com.youcruit.mailchimp.client.objects.pojos.request.AbstractRequest;
 import com.youcruit.mailchimp.client.serializers.ArrayStringAdapter;
 import com.youcruit.mailchimp.client.serializers.QueryParametersAdapter;
 
-public class Operation {
+public class Operation<T> {
 
     public Method method;
     @JsonAdapter(ArrayStringAdapter.class)
@@ -21,7 +21,7 @@ public class Operation {
     public AbstractRequest body;
     @SerializedName("operation_id")
     public String operationId;
-    public Class<?> responseClass;
+    public Class<T> responseClass;
 
     public enum Path {
 	LISTS("lists"), MEMBERS("members"), BATCHES("batches");
@@ -37,10 +37,7 @@ public class Operation {
 	}
     }
 
-    private Operation() {
-    }
-
-    private Operation(Method method, Map<String, String> params, AbstractRequest body, String operationId, Class<?> responseClass, String... path) {
+    private Operation(Method method, Map<String, String> params, AbstractRequest body, String operationId, Class<T> responseClass, String... path) {
 	this.method = method;
 	this.path = path;
 	this.body = body;
@@ -60,7 +57,6 @@ public class Operation {
 	private Map<String, String> params;
 	private AbstractRequest body;
 	private String operationId;
-	private Class<?> responseClass;
 
 	public OperationBuilder() {
 	    this.paths = new ArrayList<>();
@@ -96,13 +92,8 @@ public class Operation {
 	    return this;
 	}
 
-	public OperationBuilder responseClass(final Class<?> responseClass) {
-	    this.responseClass = responseClass;
-	    return this;
-	}
-
-	public Operation createOperation() {
-	    return new Operation(method, params, body, operationId, responseClass, paths.toArray(new String[paths.size()]));
+	public<T> Operation<T> createOperation(Class<T> responseClass) {
+	    return new Operation<T>(method, params, body, operationId, responseClass, paths.toArray(new String[paths.size()]));
 	}
     }
 }

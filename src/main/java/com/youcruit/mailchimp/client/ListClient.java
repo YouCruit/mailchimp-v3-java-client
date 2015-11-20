@@ -52,7 +52,7 @@ public class ListClient {
 	call(operation);
     }
     
-    private <V> V call(OperationCreater operationCreater) throws IOException {
+    private <V> V call(OperationCreater<V> operationCreater) throws IOException {
 	return httpClient.sync(operationCreater.createOperation());
     }
 }
