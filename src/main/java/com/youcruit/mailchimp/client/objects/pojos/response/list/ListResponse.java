@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
+import com.youcruit.mailchimp.client.objects.pojos.list.ListVisibility;
 import com.youcruit.mailchimp.client.serializers.RFC3339TypeAdapter;
 
 public class ListResponse {
@@ -35,7 +36,7 @@ public class ListResponse {
     public String subscribeUrlLong;
     @SerializedName("beamer_address")
     public String beamerAddress;
-    public String visibility;
+    public ListVisibility visibility;
     public List<String> modules;
     public ListStatsResponse stats;
     @SerializedName("_links")

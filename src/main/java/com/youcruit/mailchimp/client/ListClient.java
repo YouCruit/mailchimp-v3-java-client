@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import com.youcruit.mailchimp.client.http.HttpClient;
 import com.youcruit.mailchimp.client.http.HttpClient.Method;
+import com.youcruit.mailchimp.client.objects.pojos.request.list.CreateListRequest;
 import com.youcruit.mailchimp.client.objects.pojos.request.list.GetListRequest;
 import com.youcruit.mailchimp.client.objects.pojos.request.list.ListCreateMemberRequest;
 import com.youcruit.mailchimp.client.objects.pojos.request.list.ListMemberRequest;
@@ -25,6 +26,10 @@ public class ListClient {
 
     public ListsResponse getLists(ListsRequest request) throws IOException {
 	return httpClient.sync(Method.GET, ListsResponse.class, httpClient.toQueryParameters(request), "lists");
+    }
+    
+    public ListResponse createList(CreateListRequest request) throws IOException {
+	return httpClient.sync(request, Method.POST, ListResponse.class, "lists");
     }
 
     public ListResponse getList(String id, GetListRequest request) throws IOException {
