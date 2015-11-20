@@ -1,8 +1,9 @@
 package com.youcruit.mailchimp.client.objects.pojos.request.list;
 
 import com.google.gson.annotations.SerializedName;
+import com.youcruit.mailchimp.client.objects.pojos.request.AbstractRequest;
 
-public class CreateListRequest {
+public class CreateListRequest implements AbstractRequest {
     public String name;
     public ListCreateContactRequest contact;
     @SerializedName("permission_reminder")

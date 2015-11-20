@@ -1,6 +1,8 @@
 package com.youcruit.mailchimp.client.objects.pojos.request.list;
 
-public class ListCreateContactRequest {
+import com.youcruit.mailchimp.client.objects.pojos.request.AbstractRequest;
+
+public class ListCreateContactRequest implements AbstractRequest {
     public String company;
     public String address1;
     public String address2;

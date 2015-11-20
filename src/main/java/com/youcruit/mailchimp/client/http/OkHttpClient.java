@@ -1,19 +1,14 @@
 package com.youcruit.mailchimp.client.http;
 
 import java.io.IOException;
-import java.lang.reflect.Field;
 import java.net.URI;
-import java.util.Collection;
 import java.util.Collections;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.annotations.SerializedName;
 import com.squareup.okhttp.HttpUrl;
 import com.squareup.okhttp.Interceptor;
 import com.squareup.okhttp.MediaType;
@@ -22,8 +17,8 @@ import com.squareup.okhttp.Request.Builder;
 import com.squareup.okhttp.RequestBody;
 import com.squareup.okhttp.Response;
 import com.youcruit.mailchimp.client.exceptions.MailchimpException;
-import com.youcruit.mailchimp.client.objects.pojos.QueryParameters;
-import com.youcruit.mailchimp.client.serializers.RFC3339TypeAdapter;
+import com.youcruit.mailchimp.client.objects.pojos.Operation;
+import com.youcruit.mailchimp.client.objects.pojos.request.AbstractRequest;
 
 public class OkHttpClient implements HttpClient {
     
@@ -56,25 +51,14 @@ public class OkHttpClient implements HttpClient {
 	return new GsonBuilder().create();
     }
 
+    @SuppressWarnings("unchecked")
     @Override
-    public <V> V sync(Object requestBody, Method method, Class<V> responseClass, String... pathSegments) throws IOException {
-	Map<String, String> objectObjectMap = Collections.emptyMap();
-	return sync(requestBody, method, responseClass, objectObjectMap, pathSegments);
+    public <V> V sync(Operation operation) throws IOException {
+	return sync(operation.body, operation.method, ((Class<V>) operation.responseClass), operation.params, operation.path);
     }
 
     @Override
-    public <V> V sync(Method method, Class<V> responseClass, String... pathSegments) throws IOException {
-	Map<String, String> objectObjectMap = Collections.emptyMap();
-	return sync(null, method, responseClass, objectObjectMap, pathSegments);
-    }
-
-    @Override
-    public <V> V sync(Method method, Class<V> responseClass, Map<String, String> queryParameters, String... pathSegments) throws IOException {
-	return sync(null, method, responseClass, queryParameters, pathSegments);
-    }
-
-    @Override
-    public <V> V sync(Object requestBody, Method method, Class<V> responseClass, Map<String, String> queryParameters, String... pathSegments) throws IOException {
+    public <V> V sync(AbstractRequest requestBody, Method method, Class<V> responseClass, Map<String, String> queryParameters, String... pathSegments) throws IOException {
 	URI uri = pathToUri(queryParameters, pathSegments);
 	final Request request = createRequest(uri, requestBody, method);
 	final Response response = client.newCall(request).execute();
@@ -125,51 +109,7 @@ public class OkHttpClient implements HttpClient {
 	}
     }
 
-    @Override
-    public Map<String, String> toQueryParameters(QueryParameters queryParameters) {
-	final Map<String, String> result = new HashMap<>();
-	if (queryParameters != null) {
-	    for (Field field : queryParameters.getClass().getFields()) {
-		String key = field.getName();
-		Object value;
-		try {
-		    value = field.get(queryParameters);
-		} catch (IllegalAccessException e) {
-		    throw new RuntimeException(e.getMessage(), e);
-		}
-		if (value != null) {
-		    SerializedName annotation = field.getAnnotation(SerializedName.class);
-		    if (annotation != null) {
-			key = annotation.value();
-		    }
-		    String valueString = value.toString();
-		    if (value instanceof Collection<?>) {
-			valueString = listToString(value);
-		    } else if (value instanceof Date) {
-			RFC3339TypeAdapter rfc3339TypeAdapter = new RFC3339TypeAdapter();
-			valueString = rfc3339TypeAdapter.getDateFormat().format(value);
-		    }
-		    result.put(key, valueString);
-		}
-	    }
-	}
-	return result;
-    }
-
-    private String listToString(Object value) {
-	String valueString;
-	StringBuilder sb = new StringBuilder();
-	for (Object o : (Collection<?>) value) {
-	    if (sb.length() > 0) {
-		sb.append(",");
-	    }
-	    sb.append(o.toString());
-	}
-	valueString = sb.toString();
-	return valueString;
-    }
-
-    private URI pathToUri(final Map<String, String> queryParameters, String... pathSegments) {
+    private URI pathToUri(Map<String, String> queryParameters, String... pathSegments) {
 	HttpUrl.Builder builder = HttpUrl.get(baseUri).newBuilder();
 	for (String pathSegment : pathSegments) {
 	    builder.addPathSegment(pathSegment);

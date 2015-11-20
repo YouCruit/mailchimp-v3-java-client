@@ -4,9 +4,10 @@ import java.util.Map;
 
 import com.google.gson.annotations.SerializedName;
 import com.youcruit.mailchimp.client.objects.pojos.list.ListMemberStatus;
+import com.youcruit.mailchimp.client.objects.pojos.request.AbstractRequest;
 
-public class ListCreateMemberRequest {
-    
+public class ListCreateMemberRequest implements AbstractRequest {
+
     @SerializedName("email_type")
     public String emailType;
     public ListMemberStatus status;
