@@ -7,6 +7,6 @@ import com.youcruit.mailchimp.client.objects.pojos.Operation;
 
 public class ListBatchRequest {
 
-    public List<Operation> operations = new ArrayList<>(); 
+    public List<Operation<?>> operations = new ArrayList<>(); 
 
 }

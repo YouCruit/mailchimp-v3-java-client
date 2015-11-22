@@ -19,12 +19,7 @@ public class GetListOperation extends OperationCreater<ListResponse> {
 
     public GetListOperation(String listId, String operationId, QueryParameters queryParameters) {
 	super(ListResponse.class);
-	operationBuilder = new OperationBuilder();
-	operationBuilder.method(Method.GET);
-	operationBuilder.operationId(operationId);
-	operationBuilder.params(queryParameters);
-	operationBuilder.path(Path.LISTS);
-	operationBuilder.path(listId);
+	operationBuilder = new OperationBuilder().method(Method.GET).operationId(operationId).params(queryParameters).path(Path.LISTS).path(listId);
     }
 
 }

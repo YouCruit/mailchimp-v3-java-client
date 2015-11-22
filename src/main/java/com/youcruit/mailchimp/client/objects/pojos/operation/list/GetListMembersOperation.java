@@ -1,7 +1,6 @@
 package com.youcruit.mailchimp.client.objects.pojos.operation.list;
 
 import com.youcruit.mailchimp.client.http.HttpClient.Method;
-import com.youcruit.mailchimp.client.objects.pojos.Operation.OperationBuilder;
 import com.youcruit.mailchimp.client.objects.pojos.Operation.Path;
 import com.youcruit.mailchimp.client.objects.pojos.OperationCreater;
 import com.youcruit.mailchimp.client.objects.pojos.QueryParameters;
@@ -19,12 +18,6 @@ public class GetListMembersOperation extends OperationCreater<ListMembersRespons
 
     public GetListMembersOperation(String listId, String operationId, QueryParameters queryParameters) {
 	super(ListMembersResponse.class);
-	operationBuilder = new OperationBuilder();
-	operationBuilder.method(Method.GET);
-	operationBuilder.operationId(operationId);
-	operationBuilder.params(queryParameters);
-	operationBuilder.path(Path.LISTS);
-	operationBuilder.path(listId);
-	operationBuilder.path(Path.MEMBERS);
+	operationBuilder.method(Method.GET).operationId(operationId).params(queryParameters).path(Path.LISTS).path(listId).path(Path.MEMBERS);
     }
 }

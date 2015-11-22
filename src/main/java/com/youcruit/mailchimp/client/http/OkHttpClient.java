@@ -51,7 +51,6 @@ public class OkHttpClient implements HttpClient {
 	return new GsonBuilder().create();
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public <V> V sync(Operation<V> operation) throws IOException {
 	return sync(operation.body, operation.method, operation.responseClass, operation.params, operation.path);

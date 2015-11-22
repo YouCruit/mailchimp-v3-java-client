@@ -9,24 +9,24 @@ import com.youcruit.mailchimp.client.objects.pojos.request.AbstractRequest;
 
 public class BatchRequest implements AbstractRequest {
 
-    public List<Operation> operations;
+    public List<Operation<?>> operations;
 
     private BatchRequest() {
     }
 
-    private BatchRequest(List<Operation> operations) {
+    private BatchRequest(List<Operation<?>> operations) {
 	this.operations = operations;
     }
 
     public static class BatchRequestBuilder {
-	private List<Operation> operations;
+	private List<Operation<?>> operations;
 
 	public BatchRequestBuilder() {
 	    this.operations = new ArrayList<>();
 	}
 
-	public BatchRequestBuilder operation(final OperationCreater operation) {
-	    Operation createOperation = operation.createOperation();
+	public BatchRequestBuilder operation(final OperationCreater<?> operation) {
+	    Operation<?> createOperation = operation.createOperation();
 	    //TODO exclude from JSON instead
 	    createOperation.responseClass = null;
 	    this.operations.add(createOperation);

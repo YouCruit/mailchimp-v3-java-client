@@ -7,6 +7,7 @@ public abstract class OperationCreater<T> {
     protected final Class<T> responseClass;
 
     public OperationCreater(Class<T> clazz) {
+	this.operationBuilder = new OperationBuilder();
         this.responseClass = clazz;
     }
 
