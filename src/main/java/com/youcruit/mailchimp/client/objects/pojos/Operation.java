@@ -10,6 +10,7 @@ import com.google.gson.annotations.SerializedName;
 import com.youcruit.mailchimp.client.http.HttpClient.Method;
 import com.youcruit.mailchimp.client.objects.pojos.request.AbstractRequest;
 import com.youcruit.mailchimp.client.serializers.ArrayStringAdapter;
+import com.youcruit.mailchimp.client.serializers.BodyAdapter;
 import com.youcruit.mailchimp.client.serializers.QueryParametersAdapter;
 
 public class Operation<T> {
@@ -18,6 +19,7 @@ public class Operation<T> {
     @JsonAdapter(ArrayStringAdapter.class)
     public String[] path;
     public Map<String, String> params;
+    @JsonAdapter(BodyAdapter.class)
     public AbstractRequest body;
     @SerializedName("operation_id")
     public String operationId;
