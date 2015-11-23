@@ -26,8 +26,9 @@ public class ArrayStringAdapter extends TypeAdapter<String[]> {
 	StringBuilder sb = new StringBuilder();
 	for (String s : value) {
 	    if (sb.length() > 0) {
-		sb.append("/").append(s);
+		sb.append("/");
 	    }
+	    sb.append(s);
 	}
 	return sb.toString();
     }
