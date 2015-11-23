@@ -5,7 +5,7 @@ import java.util.Date;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.youcruit.mailchimp.client.objects.pojos.batch.BatchStatus;
-import com.youcruit.mailchimp.client.serializers.DateTimeAdapter;
+import com.youcruit.mailchimp.client.serializers.RFC3339TypeAdapter;
 
 public class BatchResponse {
 
@@ -18,10 +18,10 @@ public class BatchResponse {
     @SerializedName("errored_operations")
     public Integer erroredOperations;
     @SerializedName("submitted_at")
-    @JsonAdapter(DateTimeAdapter.class)
+    @JsonAdapter(RFC3339TypeAdapter.class)
     public Date submittedAt;
     @SerializedName("completed_at")
-    @JsonAdapter(DateTimeAdapter.class)
+    @JsonAdapter(RFC3339TypeAdapter.class)
     public Date completedAt;
     @SerializedName("response_body_url")
     public String responseBodyUrl;
