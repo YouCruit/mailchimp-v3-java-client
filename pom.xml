@@ -3,7 +3,7 @@
     <groupId>com.youcruit</groupId>
     <artifactId>mailchimp-v3-java-client</artifactId>
     <packaging>jar</packaging>
-    <version>0.0.6-SNAPSHOT</version>
+    <version>0.0.7-SNAPSHOT</version>
     <name>${project.groupId}:${project.artifactId}:${project.version}</name>
     <url>https://www.youcruit.com</url>
     <properties>
@@ -13,7 +13,8 @@
     <scm>
 	<connection>scm:git:git://github.com/YouCruit/mailchimp-v3-java-client.git</connection>
 	<developerConnection>scm:git:ssh://git@github.com/YouCruit/mailchimp-v3-java-client.git</developerConnection>
-    </scm>
+      <tag>HEAD</tag>
+  </scm>
 
     <!-- Deploy releases and snapshots to the CloudBees maven repositories -->
     <distributionManagement>
