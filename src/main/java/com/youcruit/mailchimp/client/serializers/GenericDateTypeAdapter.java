@@ -3,12 +3,15 @@ package com.youcruit.mailchimp.client.serializers;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
+import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
 
+import com.google.gson.JsonSyntaxException;
 import com.google.gson.TypeAdapter;
+import com.google.gson.internal.bind.util.ISO8601Utils;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonToken;
 import com.google.gson.stream.JsonWriter;
@@ -48,11 +51,15 @@ public class GenericDateTypeAdapter extends TypeAdapter<Date> {
 	    return null;
 	} else {
 	    String stringValue = in.nextString();
-	    if (stringValue != null && !stringValue.isEmpty()) {
+	    if (!stringValue.isEmpty()) {
 		try {
-		    return getDateFormat().parse(stringValue);
+		    return ISO8601Utils.parse(stringValue, new ParsePosition(0));
 		} catch (ParseException e) {
-		    throw new IOException(e);
+		    try {
+			return getDateFormat().parse(stringValue);
+		    } catch (ParseException f) {
+			throw new JsonSyntaxException(stringValue, e);
+		    }
 		}
 	    } else {
 		return null;
