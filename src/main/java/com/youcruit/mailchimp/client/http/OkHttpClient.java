@@ -5,41 +5,43 @@ import java.net.URI;
 import java.util.Collections;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.squareup.okhttp.HttpUrl;
-import com.squareup.okhttp.Interceptor;
-import com.squareup.okhttp.MediaType;
-import com.squareup.okhttp.Request;
-import com.squareup.okhttp.Request.Builder;
-import com.squareup.okhttp.RequestBody;
-import com.squareup.okhttp.Response;
 import com.youcruit.mailchimp.client.exceptions.MailchimpException;
 import com.youcruit.mailchimp.client.objects.pojos.Operation;
 import com.youcruit.mailchimp.client.objects.pojos.request.AbstractRequest;
+
+import okhttp3.HttpUrl;
+import okhttp3.Interceptor;
+import okhttp3.MediaType;
+import okhttp3.Request;
+import okhttp3.Request.Builder;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 public class OkHttpClient implements HttpClient {
     
     private static final MediaType APPLICATION_JSON = MediaType.parse("application/json");
 
-    private static final Logger LOGGER = Logger.getLogger(OkHttpClient.class);
+    private static final Logger LOGGER = LogManager.getLogger(OkHttpClient.class);
 
-    private final com.squareup.okhttp.OkHttpClient client;
+    private final okhttp3.OkHttpClient client;
 
     private final Gson gson;
 
     private final URI baseUri;
 
     public OkHttpClient(String password, URI baseUri) {
-	com.squareup.okhttp.OkHttpClient okHttpClient = new com.squareup.okhttp.OkHttpClient();
+	okhttp3.OkHttpClient.Builder okHttpClient = new okhttp3.OkHttpClient.Builder();
 	if (password != null) {
-	    okHttpClient.setAuthenticator(new BasicAuthenticator("mailchimp-v3-java-client", password));
+	    okHttpClient.authenticator(new BasicAuthenticator("mailchimp-v3-java-client", password));
 	}
 	okHttpClient.interceptors().add(new UserAgentInterceptor());
 	this.baseUri = baseUri;
-	client = okHttpClient;
+	this.client = okHttpClient.build();
 	this.gson = createGson();
     }
 
