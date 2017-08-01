@@ -4,7 +4,7 @@ import java.net.URI;
 import java.util.Locale;
 
 public enum APIBaseUrl {
-    US1, US2, US3, US4, US5, US6, US7, US8, US9, US10, US11, US12;
+    US1, US2, US3, US4, US5, US6, US7, US8, US9, US10, US11, US12, US13;
     
     private final String API_BASE_URL = "https://%s.api.mailchimp.com/3.0";
     
