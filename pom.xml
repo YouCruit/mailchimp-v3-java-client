@@ -1,5 +1,12 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    <parent>
+	<groupId>com.youcruit.shared</groupId>
+	<artifactId>youcruit-shared</artifactId>
+	<version>1.0.39</version>
+	<relativePath>..</relativePath>
+    </parent>
     <groupId>com.youcruit</groupId>
     <artifactId>mailchimp-v3-java-client</artifactId>
     <packaging>jar</packaging>
@@ -13,28 +20,8 @@
     <scm>
 	<connection>scm:git:git://github.com/YouCruit/mailchimp-v3-java-client.git</connection>
 	<developerConnection>scm:git:ssh://git@github.com/YouCruit/mailchimp-v3-java-client.git</developerConnection>
-      <tag>HEAD</tag>
-  </scm>
-
-    <!-- Deploy releases and snapshots to the CloudBees maven repositories -->
-    <distributionManagement>
-	<repository>
-	    <id>youcruit-cloudbees-release</id>
-	    <name>youcruit-cloudbees-release</name>
-	    <url>dav:https://repository-youcruit.forge.cloudbees.com/release/</url>
-	</repository>
-	<snapshotRepository>
-	    <id>youcruit-cloudbees-snapshot</id>
-	    <name>youcruit-cloudbees-snapshot</name>
-	    <url>dav:https://repository-youcruit.forge.cloudbees.com/snapshot/</url>
-	</snapshotRepository>
-	<site>
-	    <id>youcruit-cloudbees-site</id>
-	    <name>youcruit-cloudbees-site</name>
-	    <url>dav:https://repository-youcruit.forge.cloudbees.com/release/sites/${project.artifactId}</url>
-	</site>
-    </distributionManagement>
-
+	<tag>HEAD</tag>
+    </scm>
     <dependencies>
 	<dependency>
 	    <groupId>com.squareup.okhttp3</groupId>
@@ -60,14 +47,6 @@
 	</dependency>
     </dependencies>
     <build>
-	<extensions>
-	    <!-- Extension required to deploy a snapshot or a release to the CloudBees remote maven repository using Webdav -->
-	    <extension>
-		<groupId>org.apache.maven.wagon</groupId>
-		<artifactId>wagon-webdav</artifactId>
-		<version>1.0-beta-2</version>
-	    </extension>
-	</extensions>
 	<plugins>
 	    <plugin>
 		<groupId>org.apache.maven.plugins</groupId>
