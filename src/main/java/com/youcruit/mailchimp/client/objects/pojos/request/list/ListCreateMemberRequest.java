@@ -13,7 +13,7 @@ public class ListCreateMemberRequest implements AbstractRequest {
     public ListMemberStatus status;
     @SerializedName("merge_fields")
     public Map<String, String> mergeFields;
-    public Map<String, String> interests;
+    public Map<String, Boolean> interests;
     public String language;
     public Boolean vip;
     public ListMemberCreateLocationRequest location;
