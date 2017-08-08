@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.util.Collections;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -36,6 +37,9 @@ public class OkHttpClient implements HttpClient {
 
     public OkHttpClient(String password, URI baseUri) {
 	okhttp3.OkHttpClient.Builder okHttpClient = new okhttp3.OkHttpClient.Builder();
+	okHttpClient.readTimeout(60, TimeUnit.SECONDS);
+	okHttpClient.connectTimeout(30, TimeUnit.SECONDS);
+	okHttpClient.writeTimeout(30, TimeUnit.SECONDS);
 	if (password != null) {
 	    okHttpClient.authenticator(new BasicAuthenticator("mailchimp-v3-java-client", password));
 	}
