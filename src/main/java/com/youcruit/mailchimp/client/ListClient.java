@@ -11,6 +11,7 @@ import com.youcruit.mailchimp.client.objects.pojos.operation.list.GetListMemberO
 import com.youcruit.mailchimp.client.objects.pojos.operation.list.GetListMembersOperation;
 import com.youcruit.mailchimp.client.objects.pojos.operation.list.GetListOperation;
 import com.youcruit.mailchimp.client.objects.pojos.operation.list.GetListsOperation;
+import com.youcruit.mailchimp.client.objects.pojos.operation.list.UpsertListMemberOperation;
 import com.youcruit.mailchimp.client.objects.pojos.response.list.ListMemberResponse;
 import com.youcruit.mailchimp.client.objects.pojos.response.list.ListMembersResponse;
 import com.youcruit.mailchimp.client.objects.pojos.response.list.ListResponse;
@@ -46,6 +47,10 @@ public class ListClient {
 
     public ListMemberResponse createListMember(CreateListMemberOperation operation) throws IOException {
 	return call(operation);
+    }
+
+    public ListMemberResponse upsertListMember(UpsertListMemberOperation operation) throws IOException {
+        return call(operation);
     }
     
     public void deleteListMember(DeleteListMemberOperation operation) throws IOException {
