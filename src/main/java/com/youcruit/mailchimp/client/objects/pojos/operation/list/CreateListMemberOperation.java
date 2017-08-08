@@ -14,6 +14,6 @@ public class CreateListMemberOperation extends OperationCreater<ListMemberRespon
 
     public CreateListMemberOperation(String listId, String operationId, AbstractRequest request) {
 	super(ListMemberResponse.class);
-	operationBuilder.method(Method.POST).operationId(operationId).body(request).path(Path.LISTS).path(listId).path(Path.MEMBERS);
+	operationBuilder.method(Method.PUT).operationId(operationId).body(request).path(Path.LISTS).path(listId).path(Path.MEMBERS);
     }
 }
