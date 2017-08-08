@@ -37,9 +37,9 @@ public class OkHttpClient implements HttpClient {
 
     public OkHttpClient(String password, URI baseUri) {
 	okhttp3.OkHttpClient.Builder okHttpClient = new okhttp3.OkHttpClient.Builder();
-	okHttpClient.readTimeout(60, TimeUnit.SECONDS);
-	okHttpClient.connectTimeout(30, TimeUnit.SECONDS);
-	okHttpClient.writeTimeout(30, TimeUnit.SECONDS);
+	okHttpClient.readTimeout(300, TimeUnit.SECONDS);
+	okHttpClient.connectTimeout(60, TimeUnit.SECONDS);
+	okHttpClient.writeTimeout(60, TimeUnit.SECONDS);
 	if (password != null) {
 	    okHttpClient.authenticator(new BasicAuthenticator("mailchimp-v3-java-client", password));
 	}
