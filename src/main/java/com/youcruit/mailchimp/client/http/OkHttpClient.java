@@ -73,6 +73,7 @@ public class OkHttpClient implements HttpClient {
 	    }
 	    return gson.fromJson(responseJson, responseClass);
 	} else {
+	    LOGGER.warn("Error response json from mandrill " + uri + " : " + responseJson);
 	    throw new MailchimpException(response.code(), response.message(), uri);
 	}
     }
