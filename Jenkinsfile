@@ -54,7 +54,6 @@ pipeline {
                     jsLint(pattern: '**/jslint.xml')
                 ]
             )
-            // step([$class: 'CoberturaPublisher', coberturaReportFile: '**/cobertura-coverage.xml'])
             sh 'find . -name "*.xml" -print0 | xargs -0 touch'
             junit(testResults: '**/build/test-results/**/TEST-*.xml')
             archiveArtifacts artifacts: '**/build/test-results/**/TEST-*.xml', fingerprint: false, allowEmptyArchive: false
