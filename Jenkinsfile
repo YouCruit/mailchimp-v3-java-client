@@ -42,7 +42,7 @@ pipeline {
                 ignoreQualityGate: true,
                 enabledForFailure: true,
                 qualityGates: [[threshold: 1, type: 'NEW', unstable: true]],
-                referenceJobName: 'YouCruit-CI/youcruit/master',
+                referenceJobName: 'YouCruit-CI/mailchimp-v3-java-client/master',
                 tools: [
                     java(),
                     mavenConsole(),
