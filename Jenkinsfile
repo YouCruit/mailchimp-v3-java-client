@@ -58,10 +58,6 @@ pipeline {
             junit(allowEmptyResults: true, testResults: '**/build/test-results/**/TEST-*.xml')
             archiveArtifacts(artifacts: '**/build/test-results/**/TEST-*.xml', fingerprint: false, allowEmptyArchive: true)
         }
-
-        cleanup {
-            sh 'killall mongod || true'
-        }
     }
 }
 
