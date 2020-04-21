@@ -55,8 +55,8 @@ pipeline {
                 ]
             )
             sh 'find . -name "*.xml" -print0 | xargs -0 touch'
-            //junit(testResults: '**/build/test-results/**/TEST-*.xml')
-            archiveArtifacts allowEmptyResults: true, artifacts: '**/build/test-results/**/TEST-*.xml', fingerprint: false, allowEmptyArchive: false
+            junit(allowEmptyResults: true, testResults: '**/build/test-results/**/TEST-*.xml')
+            archiveArtifacts(artifacts: '**/build/test-results/**/TEST-*.xml', fingerprint: false, allowEmptyArchive: false)
         }
 
         cleanup {
